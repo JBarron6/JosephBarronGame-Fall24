@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -38,5 +39,12 @@ public class PlayerMove : MonoBehaviour
         }
         Vector3 pos = transform.position;
         transform.position = new Vector3(pos.x + dirx * speed * Time.deltaTime, pos.y + diry * speed * Time.deltaTime, pos.z);
-    }   
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Danger")
+        {
+            SceneManager.SetActiveScene(SceneManager.GetActiveScene());
+        }
+    }
 }
